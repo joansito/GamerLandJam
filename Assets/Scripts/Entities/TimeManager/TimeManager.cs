@@ -28,6 +28,11 @@ public class TimeManager : MonoBehaviour
     {
         day += 1;
         time = 480;
+
+        if (day >= 28)
+        {
+            this.SendMessageUpwards(GameControllerEvents.Victory);
+        }
     }
 
     public void JumpWorkTime()

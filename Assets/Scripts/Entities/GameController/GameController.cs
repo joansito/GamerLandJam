@@ -10,6 +10,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(2, LoadSceneMode.Single);
     }
 
+    public void Victory()
+    {
+        SceneManager.LoadScene(3, LoadSceneMode.Single);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

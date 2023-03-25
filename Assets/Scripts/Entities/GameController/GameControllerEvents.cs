@@ -5,4 +5,5 @@ using UnityEngine;
 public class GameControllerEvents
 {
     public static string Death = "Death";
+    public static string Victory = "Victory";
 }
