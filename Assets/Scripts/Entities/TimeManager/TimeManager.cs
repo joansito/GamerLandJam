@@ -9,6 +9,9 @@ public class TimeManager : MonoBehaviour
     public int time = 0; // In minutes
     public bool paused = false;
 
+    public TextMesh dayText;
+    public TextMesh timeText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +40,19 @@ public class TimeManager : MonoBehaviour
         if (paused) return;
 
         time = Mathf.CeilToInt(Time.deltaTime);
+    }
+
+    private void UpdateDateTimeText()
+    {
+        dayText.text = "Día " + day;
+
+        int hours = Mathf.CeilToInt(time / 60);
+        if (hours >= 24)
+        {
+            hours -= 24;
+        }
+
+        int minutes = time - (hours * 60);
+        timeText.text = (hours < 10 ? "0" + hours : hours) + ":" + minutes;
     }
 }
