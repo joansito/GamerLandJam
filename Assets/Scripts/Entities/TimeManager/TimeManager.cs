@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    public float passiveHealthDecay = 0;
+    public float passiveSatisfactionDecay = 0;
+    public float passiveLeisureDecay = 0;
+
     public List<Action> actions;
+    public Action activeAction;
+    public int activeActionCompletionTime;
+
+    public WorldEvent worldEvent;
+
     public int day = 0;
     public int time = 0; // In minutes
     public bool paused = false;
@@ -24,10 +33,19 @@ public class TimeManager : MonoBehaviour
         
     }
 
+    public void DoAction(Action action)
+    {
+        if (!action.active) return;
+
+        activeAction = action;
+        activeActionCompletionTime = time + action.timeToCompletion;
+    }
+
     public void JumpToNextDay()
     {
         day += 1;
         time = 480;
+        worldEvent = WorldEventFactory.GetWorldEvent(day);
 
         if (day >= 28)
         {
