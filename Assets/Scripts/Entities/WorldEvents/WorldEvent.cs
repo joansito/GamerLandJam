@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldEvent : MonoBehaviour
+public abstract class WorldEvent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string name;
+    public float healthModifier = 1;
+    public float satisfactionModifier = 1;
+    public float leisureModifier = 1;
+    public List<Action> affectedActions = new List<Action>();
 }
