@@ -58,9 +58,10 @@ public class Player : MonoBehaviour
         if (busy) return;
         if (Input.GetKeyDown(KeyCode.A)) {
             Action action = collision.gameObject.GetComponent<Action>();
-            action.DoAction();
+            this.SendMessageUpwards(TimeManagerEvents.DoAction, action);
 
             busy = true;
+            // Activar animación correspondiente
         }
     }
 }
