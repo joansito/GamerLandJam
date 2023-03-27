@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class Sleep : Action
 {
-    public Sleep()
+    public void Start()
     {
-        actionName = "Sleep";
-        health = 25f;
-        satisfaction = 25f;
-        leisure = 25f;
-        active = false;
-        timeToCompletion = Random.Range(480, 720); // Random porque sep
-        timesCompleted = 0;
-        timesCompletedToday = 0;
-
+        actionName = "Dormir";
+        active = true;
     }
 }

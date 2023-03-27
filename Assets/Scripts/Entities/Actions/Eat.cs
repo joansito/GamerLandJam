@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Eat : Action
 {
-    public Eat()
+    void Start()
     {
-        actionName = "Sleep";
-        health = 25f;
-        satisfaction = 25f;
-        leisure = 25f;
-        active = false;
-        timeToCompletion = Random.Range(480, 720); // Random porque sep
-        timesCompleted = 0;
-        timesCompletedToday = 0;
-
+        actionName = "Comer";
+        health = 0.05f;
+        timeToCompletion = 60;
     }
 }
