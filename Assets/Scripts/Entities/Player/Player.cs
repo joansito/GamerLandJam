@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         CheckIfDead();
-        Debug.Log(health);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -35,8 +34,13 @@ public class Player : MonoBehaviour
     public void UpdateStats(float health, float satisfaction, float leisure)
     {
         this.health += health;
+        if (this.health > 100) this.health = 100;
+
         this.satisfaction += satisfaction;
+        if (this.satisfaction > 100) this.satisfaction = 100;
+
         this.leisure += leisure;
+        if (this.leisure > 100) this.leisure = 100;
 
         healthBar.UpdateBar();
         satisfactionBar.UpdateBar();
@@ -47,7 +51,6 @@ public class Player : MonoBehaviour
     {
         if (health <= 0 || satisfaction <= 0 || leisure <= 0)
         {
-            Debug.Log("dead");
             this.SendMessageUpwards(GameControllerEvents.Death);
             return true;
         }
@@ -58,12 +61,17 @@ public class Player : MonoBehaviour
     private void DoAction(Collision2D collision)
     {
         if (busy) return;
-        if (Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             Action action = collision.gameObject.GetComponent<Action>();
             this.SendMessageUpwards(TimeManagerEvents.DoAction, action);
 
             busy = true;
             // Activar animación correspondiente
         }
+    }
+
+    public void ActionCompleted()
+    {
+        busy = false;
     }
 }

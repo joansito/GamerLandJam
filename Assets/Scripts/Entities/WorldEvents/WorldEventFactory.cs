@@ -9,7 +9,7 @@ public class WorldEventFactory
         switch (day)
         {
             case 1:
-                return new List<WorldEvent>();
+                return new List<WorldEvent> { new WorldEvent("Normal", 20, 0, 0, new List<string> { "Comer" }, WorldEventType.ActionModifier) };
             default:
                 return new List<WorldEvent>();
         }

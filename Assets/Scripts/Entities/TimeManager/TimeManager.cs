@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour
     public Action activeAction;
     public int activeActionCompletionTime;
 
-    public List<WorldEvent> worldEvents;
+    public List<WorldEvent> worldEvents = new List<WorldEvent>();
 
     Clock clock;
     public Player player;
@@ -26,7 +26,7 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckIfActionCompleted();
     }
 
     private void FixedUpdate()
@@ -49,7 +49,7 @@ public class TimeManager : MonoBehaviour
         float leisureDecay = passiveLeisureDecay;
 
         // Apply Action efect
-        if (activeAction)
+        if (activeAction != null)
         {
             if (activeAction.health != 0) healthDecay = activeAction.health;
             if (activeAction.satisfaction != 0) satisfactionDecay = activeAction.satisfaction;
@@ -68,9 +68,9 @@ public class TimeManager : MonoBehaviour
             }
 
             WorldEvent actionEvent = worldEvents.Find(we => we.type == WorldEventType.ActionModifier);
-            if (actionEvent != null)
+            if (actionEvent != null && activeAction != null)
             {
-                if (actionEvent.affectedActions.Contains(activeAction.name))
+                if (actionEvent.affectedActions.Contains(activeAction.actionName))
                 {
                     healthDecay += actionEvent.healthModifier;
                     satisfactionDecay += actionEvent.satisfactionModifier;
@@ -116,5 +116,17 @@ public class TimeManager : MonoBehaviour
     {
         worldEvents = WorldEventFactory.GetWorldEvents(day);
         UpdateActionStatusByWorldEvent();
+    }
+
+    private void CheckIfActionCompleted()
+    {
+        if (activeAction == null) return;
+
+        if (activeActionCompletionTime <= clock.GetCurrentDayTime())
+        {
+            activeAction = null;
+            activeActionCompletionTime = 0;
+            player.ActionCompleted();
+        }
     }
 }
