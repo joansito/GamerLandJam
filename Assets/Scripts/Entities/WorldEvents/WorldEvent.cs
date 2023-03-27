@@ -11,4 +11,26 @@ public class WorldEvent
     public List<string> affectedActions = new List<string>();
 
     public WorldEventType type;
+
+    public WorldEvent(
+        string name,
+        float health,
+        float satisfaction,
+        float leisure,
+        List<string> affectedActions,
+        WorldEventType type
+    )
+    {
+        this.name = name;
+        this.healthModifier = health;
+        this.satisfactionModifier = satisfaction;
+        this.leisureModifier = leisure;
+        this.affectedActions = affectedActions;
+        this.type = type;
+    }
+
+    public static WorldEvent Normal()
+    {
+        return new WorldEvent("Normal", 0, 0, 0, new List<string>(), WorldEventType.StatusModifier);
+    }
 }

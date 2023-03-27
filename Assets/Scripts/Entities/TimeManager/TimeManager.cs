@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public float passiveHealthDecay = 0;
-    public float passiveSatisfactionDecay = 0;
-    public float passiveLeisureDecay = 0;
+    public float passiveHealthDecay = -0.1f;
+    public float passiveSatisfactionDecay = -0.1f;
+    public float passiveLeisureDecay = -0.1f;
 
     public List<Action> actions;
     public Action activeAction;
@@ -15,7 +15,7 @@ public class TimeManager : MonoBehaviour
     public List<WorldEvent> worldEvents;
 
     Clock clock;
-    Player player;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +26,12 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateDecay();
+        
     }
 
     private void FixedUpdate()
     {
-        
+        CalculateDecay();
     }
 
     public void DoAction(Action action)

@@ -30,6 +30,7 @@ public class Clock : MonoBehaviour
         timeElapsed = 0f;
 
         timeManager = this.GetComponent<TimeManager>();
+        timeManager.NewDay(currentDay);
     }
 
     private void Update()
