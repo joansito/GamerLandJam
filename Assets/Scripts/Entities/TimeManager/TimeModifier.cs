@@ -12,20 +12,36 @@ public class TimeModifier : MonoBehaviour
 
     private void Update()
     {
+        //Condiciales para probar, teclas 1,2 y 3
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Slow down time by the specified factor
-            timeManager.SetTimeScale(timeManager.defaultTimeScale * slowDownFactor);
+            SlowDownTime();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // Speed up time by the specified factor
-            timeManager.SetTimeScale(timeManager.defaultTimeScale * speedUpFactor);
+            SpeedUpTime();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            // Reset time to the default speed
-            timeManager.SetTimeScale(timeManager.defaultTimeScale);
+            ResetTimeScale();
         }
+    }
+
+    // Slows down time by the specified factor
+    public void SlowDownTime()
+    {
+        timeManager.SetTimeScale(timeManager.defaultTimeScale * slowDownFactor);
+    }
+
+    // Speeds up time by the specified factor
+    public void SpeedUpTime()
+    {
+        timeManager.SetTimeScale(timeManager.defaultTimeScale * speedUpFactor);
+    }
+
+    // Resets the time scale to the default value
+    public void ResetTimeScale()
+    {
+        timeManager.SetTimeScale(timeManager.defaultTimeScale);
     }
 }
