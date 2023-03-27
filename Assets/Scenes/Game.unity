@@ -2243,6 +2243,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC
       objectReference: {fileID: 0}
+    - target: {fileID: 3914390729070384757, guid: c41529227c55fa444b0f2ce23695369b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3914390729070384759, guid: c41529227c55fa444b0f2ce23695369b,
         type: 3}
       propertyPath: m_RootOrder
@@ -2312,6 +2317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cama
       objectReference: {fileID: 0}
+    - target: {fileID: 4716920053991618316, guid: b402137bd277f374fa261913a7b21f4c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4716920053991618318, guid: b402137bd277f374fa261913a7b21f4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -2376,6 +2386,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5400138579235433432, guid: 5ca3e3720f61c7748857ba32d79738e4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5400138579235433434, guid: 5ca3e3720f61c7748857ba32d79738e4,
         type: 3}
       propertyPath: m_Name
