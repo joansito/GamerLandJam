@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float health = 100;
-    public float satisfaction = 100;
-    public float leisure = 100;
+    public float health = 100f;
+    public float satisfaction = 100f;
+    public float leisure = 100f;
 
     public HealthBar healthBar;
     public SatisfactionBar satisfactionBar;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CheckIfDead();
+        Debug.Log(health);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
     {
         if (health <= 0 || satisfaction <= 0 || leisure <= 0)
         {
+            Debug.Log("dead");
             this.SendMessageUpwards(GameControllerEvents.Death);
             return true;
         }
