@@ -11,6 +11,7 @@ public class Normal : WorldEvent
         satisfactionModifier = 1;
         leisureModifier = 1;
         affectedActions = new List<Action>();
+        worldEventType = WorldEventType.StatusModifier;
     }
 
 }

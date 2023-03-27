@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // using text mesh for the clock display
 
-public class TimeManagerV2 : MonoBehaviour
+public class Clock : MonoBehaviour
 {
     public TextMeshProUGUI timeDisplay; // Display Time
     public TextMeshProUGUI dayDisplay; // Display Day
@@ -17,7 +17,10 @@ public class TimeManagerV2 : MonoBehaviour
     private int currentMinute; // The current minute of the hour
     private int currentDay; // The current day of the year
     private float timeElapsed; // The amount of time that has passed since the last minute
-    private float timeScale = 1f; // The speed at which time is passing
+    private float timeScale = 10f; // The speed at which time is passing
+
+    TimeManager timeManager;
+
 
     private void Start()
     {
@@ -25,6 +28,8 @@ public class TimeManagerV2 : MonoBehaviour
         currentMinute = 0;
         currentDay = 1;
         timeElapsed = 0f;
+
+        timeManager = this.GetComponent<TimeManager>();
     }
 
     private void Update()
@@ -53,6 +58,7 @@ public class TimeManagerV2 : MonoBehaviour
                 {
                     currentHour = 0;
                     currentDay++;
+                    UpdateTimeManagerDay();
 
                     // If we've reached the end of a year, reset the day
                     if (currentDay > daysPerYear)
@@ -84,6 +90,11 @@ public class TimeManagerV2 : MonoBehaviour
         return currentDay;
     }
 
+    public int GetCurrentDayTime()
+    {
+        return (currentHour * 60) + currentMinute;
+    }
+
     public int GetActualHour()
     {
         int hour = currentHour;
@@ -104,5 +115,10 @@ public class TimeManagerV2 : MonoBehaviour
 
         timeDisplay.text = string.Format("{0:00}:{1:00}", currentHour, currentMinute); // The formatting ensures that there will always be 0's in empty spaces
         dayDisplay.text = "Day: " + currentDay; // display day counter
+    }
+
+    private void UpdateTimeManagerDay()
+    {
+        timeManager.NewDay(currentDay);
     }
 }

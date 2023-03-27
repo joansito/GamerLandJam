@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WorldEventFactory
 {
-    public static WorldEvent GetWorldEvent(int day)
+    public static List<WorldEvent> GetWorldEvents(int day)
     {
         switch (day)
         {
             case 1:
-                return new Normal();
+                return new List<WorldEvent>();
             default:
-                return new Normal();
+                return new List<WorldEvent>();
         }
     }
 }

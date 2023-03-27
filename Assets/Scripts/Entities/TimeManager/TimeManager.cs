@@ -12,23 +12,24 @@ public class TimeManager : MonoBehaviour
     public Action activeAction;
     public int activeActionCompletionTime;
 
-    public WorldEvent worldEvent;
+    public List<WorldEvent> worldEvents;
 
-    public int day = 0;
-    public int time = 0; // In minutes
-    public bool paused = false;
-
-    public TextMesh dayText;
-    public TextMesh timeText;
+    Clock clock;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        clock = this.gameObject.GetComponent<Clock>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        CalculateDecay();
+    }
+
+    private void FixedUpdate()
     {
         
     }
@@ -38,44 +39,82 @@ public class TimeManager : MonoBehaviour
         if (!action.active) return;
 
         activeAction = action;
-        activeActionCompletionTime = time + action.timeToCompletion;
+        activeActionCompletionTime =  clock.GetCurrentDayTime() + action.timeToCompletion;
     }
 
-    public void JumpToNextDay()
+    private void CalculateDecay()
     {
-        day += 1;
-        time = 480;
-        worldEvent = WorldEventFactory.GetWorldEvent(day);
+        float healthDecay = passiveHealthDecay;
+        float satisfactionDecay = passiveSatisfactionDecay;
+        float leisureDecay = passiveLeisureDecay;
 
-        if (day >= 28)
+        // Apply Action efect
+        if (activeAction)
         {
-            this.SendMessageUpwards(GameControllerEvents.Victory);
+            if (activeAction.health != 0) healthDecay = activeAction.health;
+            if (activeAction.satisfaction != 0) satisfactionDecay = activeAction.satisfaction;
+            if (activeAction.leisure != 0) leisureDecay = activeAction.leisure;
+        }
+
+        // Apply WorldEvent modifiers
+        if (HasWorldEvents())
+        {
+            WorldEvent statusEvent = worldEvents.Find(we => we.type == WorldEventType.StatusModifier);
+            if (statusEvent != null)
+            {
+                healthDecay += statusEvent.healthModifier;
+                satisfactionDecay += statusEvent.satisfactionModifier;
+                leisureDecay += statusEvent.leisureModifier;
+            }
+
+            WorldEvent actionEvent = worldEvents.Find(we => we.type == WorldEventType.ActionModifier);
+            if (actionEvent != null)
+            {
+                if (actionEvent.affectedActions.Contains(activeAction.name))
+                {
+                    healthDecay += actionEvent.healthModifier;
+                    satisfactionDecay += actionEvent.satisfactionModifier;
+                    leisureDecay += actionEvent.leisureModifier;
+                }
+            }
+        }
+
+        player.UpdateStats(healthDecay, satisfactionDecay, leisureDecay);
+    }
+
+    private void UpdateActionStatusByWorldEvent()
+    {
+        if (!HasWorldEvents()) return;
+
+        WorldEvent activationEvent = worldEvents.Find(we => we.type == WorldEventType.ActionActivation);
+        if (activationEvent != null)
+        {
+            activationEvent.affectedActions.ForEach(actionName =>
+            {
+                Action action = actions.Find(ac => ac.name == actionName);
+                action.active = true;
+            });
+        }
+
+        WorldEvent deactivationEvent = worldEvents.Find(we => we.type == WorldEventType.ActionDeactivation);
+        if (deactivationEvent != null)
+        {
+            deactivationEvent.affectedActions.ForEach(actionName =>
+            {
+                Action action = actions.Find(ac => ac.name == actionName);
+                action.active = false;
+            });
         }
     }
 
-    public void JumpWorkTime()
+    private bool HasWorldEvents()
     {
-        time += 480;
+        return worldEvents.Count > 0;
     }
 
-    private void UpdateTime()
+    public void NewDay(int day)
     {
-        if (paused) return;
-
-        time = Mathf.CeilToInt(Time.deltaTime);
-    }
-
-    private void UpdateDateTimeText()
-    {
-        dayText.text = "Día " + day;
-
-        int hours = Mathf.CeilToInt(time / 60);
-        if (hours >= 24)
-        {
-            hours -= 24;
-        }
-
-        int minutes = time - (hours * 60);
-        timeText.text = (hours < 10 ? "0" + hours : hours) + ":" + minutes;
+        worldEvents = WorldEventFactory.GetWorldEvents(day);
+        UpdateActionStatusByWorldEvent();
     }
 }
