@@ -353,6 +353,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335867588}
   m_CullTransparentMesh: 0
+--- !u!114 &467210918 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8310712936292698376, guid: 2c8a62b4492a24c4a85fbcf4a8dc0331,
+    type: 3}
+  m_PrefabInstance: {fileID: 6029534811493791950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1361,85 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6029534811493791950}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1326244371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326244374}
+  - component: {fileID: 1326244373}
+  - component: {fileID: 1326244372}
+  m_Layer: 0
+  m_Name: TimeManagerV2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1326244372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326244371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c96953224c0e7945876430867fa5b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 1326244373}
+  slowDownFactor: 0.5
+  speedUpFactor: 2
+--- !u!114 &1326244373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326244371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b38d0eecab8f6d4eaf2db38bdf71493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDisplay: {fileID: 467210918}
+  dayDisplay: {fileID: 1541309706}
+  startingHour: 8
+  hoursPerDay: 24
+  minutesPerHour: 60
+  daysPerYear: 365
+  defaultTimeScale: 1
+--- !u!4 &1326244374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326244371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 435.8283, y: 186.2447, z: 2.319469}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541309706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8783634385299540567, guid: 2c8a62b4492a24c4a85fbcf4a8dc0331,
+    type: 3}
+  m_PrefabInstance: {fileID: 6029534811493791950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!850595691 &1659472973
 LightingSettings:
   m_ObjectHideFlags: 0
