@@ -26,10 +26,6 @@ public class Player : MonoBehaviour
         CheckIfDead();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        DoAction(collision);
-    }
 
     public void UpdateStats(float health, float satisfaction, float leisure)
     {
@@ -58,14 +54,14 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    private void DoAction(Collision2D collision)
+    public void DoAction(Collider2D collision)
     {
         if (busy) return;
         if (Input.GetKeyDown(KeyCode.Q)) {
             Action action = collision.gameObject.GetComponent<Action>();
             this.SendMessageUpwards(TimeManagerEvents.DoAction, action);
 
-            busy = true;
+            setPlayerBusy(true);
             // Activar animación correspondiente
         }
     }
@@ -73,5 +69,9 @@ public class Player : MonoBehaviour
     public void ActionCompleted()
     {
         busy = false;
+    }
+
+    public void setPlayerBusy(bool busy) {
+        this.busy = busy;
     }
 }
